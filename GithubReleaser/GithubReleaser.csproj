@@ -136,8 +136,7 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>
-    </PostBuildEvent>
+    <PostBuildEvent>C:\Users\Me\GitHubReleaser\GithubReleaser.exe User=BadCodr TokenFile=C:\Users\Me\GitHubReleaser\GitHubToken Repo=GitHubReleaser BuildDir=C:\Users\Me\Source\Repos\GitHubReleaser\GithubReleaser\bin\Release\ Promote=True ProName=GitHubReleaser</PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
     <PreBuildEvent>
