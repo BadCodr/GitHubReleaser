@@ -96,7 +96,7 @@ namespace GitHubReleaser
 
             var newRelease = new NewRelease("Build-" + buildNumber);
             newRelease.Name = "Build " + buildNumber+" @ "+ DateTime.UtcNow.ToString("MM/dd/yyyy HH:mm:ss UTC");
-            newRelease.Body = promote ? "" : "This was automatically uploaded by [GitHubReleaser](https://github.com/BadCodr/GitHubReleaser) @BadCodr";
+            newRelease.Body = promote ? "This was automatically uploaded by [GitHubReleaser](https://github.com/BadCodr/GitHubReleaser) @BadCodr" : "";
             newRelease.Draft = false;
             newRelease.Prerelease = false;
 
