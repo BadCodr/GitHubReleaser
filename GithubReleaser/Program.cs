@@ -56,7 +56,7 @@ namespace GitHubReleaser
 
                     default:
                         Console.WriteLine("Unknown Argument: {0}", s);
-                        return;
+                        break;
                 }
             }
 
@@ -102,7 +102,7 @@ namespace GitHubReleaser
 
             var result = await client.Repository.Release.Create(username, repo, newRelease);
 
-            var archiveContents = File.OpenRead(projectName + buildNumber + ".zip"); // TODO: better sample
+            var archiveContents = File.OpenRead(Path.GetTempPath() + projectName + buildNumber + ".zip"); // TODO: better sample
             var assetUpload = new ReleaseAssetUpload()
             {
                 FileName = projectName + buildNumber + ".zip",
@@ -128,23 +128,22 @@ namespace GitHubReleaser
             string[] Files = targets.Split(',');
             if (Files[0].Length > 0)
             {
-                var zip = ZipFile.Open(projectName + buildNumber + ".zip", ZipArchiveMode.Create);
+                var zip = ZipFile.Open(Path.GetTempPath() + projectName + buildNumber + ".zip", ZipArchiveMode.Create);
                 foreach (var file in Files)
                 {
                     zip.CreateEntryFromFile(buildDir+file, file, CompressionLevel.Optimal);
                 }
                 zip.Dispose();
-
             }
 
             else
-                ZipFile.CreateFromDirectory(buildDir, projectName + buildNumber + ".zip");
+                ZipFile.CreateFromDirectory(buildDir, Path.GetTempPath() + projectName + buildNumber + ".zip");
             
         }
 
         static void Clean(string projectName, string buildNumber)
         {
-            File.Delete(projectName + buildNumber + ".zip");
+            File.Delete(Path.GetTempPath() + projectName + buildNumber + ".zip");
         }
 
         static void Init()
